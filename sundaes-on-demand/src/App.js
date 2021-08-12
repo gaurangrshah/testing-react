@@ -1,7 +1,8 @@
+import SummaryForm from "./pages/summary/SummaryForm";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor: 'teal', color: 'ivory', minHeight: '100vh'}}>
       <header className="App-header">
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -15,6 +16,7 @@ function App() {
           Learn React P
         </a>
       </header>
+      <SummaryForm/>
     </div>
   );
 }
