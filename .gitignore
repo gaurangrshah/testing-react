@@ -110,3 +110,6 @@ dist
 .env.local
 
 .DS_Store
+
+.vscode
+.eslintcache
