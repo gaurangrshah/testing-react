@@ -40,8 +40,9 @@ build/Release
 # Dependency directories
 jspm_packages/
 # recursively ignore node_modules
-**/node_modules 
+node_modules 
 node_modules/
+
 
 
 # TypeScript v1 declaration files
@@ -111,4 +112,6 @@ dist
 .env.local
 
 .DS_Store
-.vscode/
+
+.vscode
+.eslintcache
