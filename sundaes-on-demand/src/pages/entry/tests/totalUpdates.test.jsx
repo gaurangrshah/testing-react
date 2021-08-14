@@ -63,58 +63,63 @@ describe("grand total", () => {
   let grandTotal;
   beforeEach(() => {
     render(<OrderEntry />);
-    grandTotal = screen.getByRole('heading', {
+    grandTotal = screen.getByRole("heading", {
       name: /grand total: \$/i,
     }); // escape the dollar sign with "\"
-  })
-  
-  test("grand total updates properly if scoop is added first", async() => {
-    
+  });
+
+  test("grand total updates properly if scoop is added first", async () => {
     // ensure that grandTotal starts at $0.00
     expect(grandTotal).toHaveTextContent("$0.00");
-    
+
     const chocolateInput = await screen.findByRole("spinbutton", {
       name: "Chocolate",
-    });    
+    });
     userEvent.clear(chocolateInput);
-    userEvent.type(chocolateInput, "2"); 
-    expect(grandTotal).toHaveTextContent('4.00') 
-    const cherriesCheckbox = await screen.findByRole('checkbox', {name: 'Cherries'})
-    userEvent.click(cherriesCheckbox)
-    expect(grandTotal).toHaveTextContent('5.50') 
+    userEvent.type(chocolateInput, "2");
+    expect(grandTotal).toHaveTextContent("4.00");
+    const cherriesCheckbox = await screen.findByRole("checkbox", {
+      name: "Cherries",
+    });
+    userEvent.click(cherriesCheckbox);
+    expect(grandTotal).toHaveTextContent("5.50");
   });
+
   test("grand total updates properly if topping is added first", async () => {
-    const cherriesCheckbox = await screen.findByRole('checkbox', {name: 'Cherries'})
-    userEvent.click(cherriesCheckbox)
-    expect(grandTotal).toHaveTextContent('1.50') 
+    const cherriesCheckbox = await screen.findByRole("checkbox", {
+      name: "Cherries",
+    });
+    userEvent.click(cherriesCheckbox);
+    expect(grandTotal).toHaveTextContent("1.50");
     const vanillaInput = await screen.findByRole("spinbutton", {
       name: "Vanilla",
-    });    
+    });
     userEvent.clear(vanillaInput);
-    userEvent.type(vanillaInput, "1"); 
-    expect(grandTotal).toHaveTextContent('3.50') 
+    userEvent.type(vanillaInput, "1");
+    expect(grandTotal).toHaveTextContent("3.50");
   });
   test("grand total updates properly if an item is removed", async () => {
     // add cherreis
-    const cherriesCheckbox = await screen.findByRole('checkbox', {
-      name: 'Cherries',
+    const cherriesCheckbox = await screen.findByRole("checkbox", {
+      name: "Cherries",
     });
     userEvent.click(cherriesCheckbox);
 
     // update vanilla scoops to 2' total: $5.50
     const vanillaInput = await screen.findByRole("spinbutton", {
       name: "Vanilla",
-    });    
+    });
     userEvent.clear(vanillaInput);
-    userEvent.type(vanillaInput, "2"); 
-    expect(grandTotal).toHaveTextContent('5.50')
+    userEvent.type(vanillaInput, "2");
+    expect(grandTotal).toHaveTextContent("5.50");
 
     // remove 1 scoop of vanilla; total: $3.50
-    userEvent.type(vanillaInput, "1"); 
-    expect(grandTotal).toHaveTextContent('3.50')
+    userEvent.type(vanillaInput, "1");
+    expect(grandTotal).toHaveTextContent("3.50");
 
     // remove cherries; total: $2.00
-    userEvent.click(cherriesCheckbox)
-    expect(grandTotal).toHaveTextContent('2.00')
+    userEvent.click(cherriesCheckbox);
+    expect(grandTotal).toHaveTextContent("2.00");
   });
 });
+
