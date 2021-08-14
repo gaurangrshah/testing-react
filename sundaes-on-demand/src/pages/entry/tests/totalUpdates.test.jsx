@@ -67,11 +67,12 @@ describe("grand total", () => {
       name: /grand total: \$/i,
     }); // escape the dollar sign with "\"
   })
-  test("grand total starts at $0.00", () => {
-    // render(<OrderEntry />);
-    expect(grandTotal).toHaveTextContent("$0.00");
-  });
+  
   test("grand total updates properly if scoop is added first", async() => {
+    
+    // ensure that grandTotal starts at $0.00
+    expect(grandTotal).toHaveTextContent("$0.00");
+    
     const chocolateInput = await screen.findByRole("spinbutton", {
       name: "Chocolate",
     });    
