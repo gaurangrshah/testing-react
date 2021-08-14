@@ -6,6 +6,8 @@ import ToppingOption from './ToppingOption';
 import AlertBanner from '../common/AlertBanner';
 import { pricePerItem } from '../../constants';
 import { useOrderDetails } from '../../contexts/OrderDetails';
+import { formatCurrency } from '../../utils';
+
 
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
@@ -15,8 +17,8 @@ export default function Options({ optionType }) {
   // optionType is 'scoops' or 'toppings'
   useEffect(() => {
     axios
-      .get(`http://localhost:3030/${optionType}`)
-      .then((response) => setItems(response.data))
+    .get(`http://localhost:3030/${optionType}`)
+    .then((response) => setItems(response.data))
       .catch((error) => setError(true));
   }, [optionType]);
 
@@ -42,7 +44,7 @@ export default function Options({ optionType }) {
   return (
     <>
       <h2>{title}</h2>
-      <p>{pricePerItem[optionType]} each</p>
+      <p>{formatCurrency(pricePerItem[optionType])} each</p>
       <p>
         {title} total: {orderDetails.totals[optionType]}
       </p>
